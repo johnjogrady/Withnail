@@ -1,0 +1,33 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}
+    list page
+{% endblock %}
+
+{% block listLinkStyle %}
+    current_page
+{% endblock %}
+
+{% block main %}
+
+    <!-- start table for displaying DVD details -->
+    <h2>Lists of DVDs and their average votes</h2>
+
+    <table>
+        <tr>
+            <th> ID </th>
+            <th> title </th>
+        </tr>
+
+        {% for movie in movies %}
+
+            <tr>
+                <td> {{ movie.id }}</td>
+                <td> {{ movie.title }}</td>
+            </tr>
+
+
+        {% endfor %}
+    </table>
+
+{% endblock %}

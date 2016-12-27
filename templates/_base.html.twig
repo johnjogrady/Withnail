@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>WITHNAIL{% block pageTitle %}{% endblock %}</title>
+    <style>
+        @import "../css/1_root.css";
+        @import "../css/2_basic.css";
+        @import "../css/3_header_footer.css";
+        @import "../css/4_layout.css";
+        @import "../css/5_nav.css";
+        @import "../css/6_aside.css";
+    </style>
+</head>
+<body>
+
+<header>
+    <div id="topnav">
+      <nav>
+              <ul>
+                <li>
+                    <img height="130" src="../images/logo.jpg" alt="Withnail and I">
+                </li>
+
+                  <li>
+                      <img src="../images/banner_all3.jpg" alt="Withnail and I">
+                  </li>
+
+                  <li>
+                      <img src="../images/street_image.jpg" alt="Withnail and I">
+                  </li>
+                <li>
+                    <img src="../images/footsteps.jpg" alt="Withnail and I">
+                </li>
+<li>
+
+
+</li>
+            </ul>
+
+      </nav>
+    </div>
+</header>
+
+<nav>
+    <div id="sidenav">
+        <ul>
+            <li>
+                <a href="index.php?action=index" class="{% block indexNavStyle %}{% endblock %}">Home</a>
+
+            </li>
+
+            <li>
+                <a href="index.php?action=clothing" class="{% block clothingNavStyle %}{% endblock %}">Clothing</a>
+            </li>
+            <li>
+                <a href="index.php?action=about" class="{% block aboutNavStyle %}{% endblock %}">About</a>
+            </li>
+            <li>
+                <a href="index.php?action=merchandise" class="{% block merchandiseNavStyle %}{% endblock %}">Merchandise</a>
+            </li>
+
+            <li>
+                <a href="index.php?action=posters" class="{% block postersNavStyle %}{% endblock %}">Posters</a>
+            </li>
+            <li>
+                <a href="index.php?action=list" class="{% block productsNavStyle %}{% endblock %}">Products</a>
+            </li>
+            <li>
+                <a href="index.php?action=cast" class="{% block castNavStyle %}{% endblock %}">Cast</a>
+            </li>
+            <li>
+                <a href="index.php?action=script" class="{% block scriptNavStyle %}{% endblock %}">Script</a>
+            </li>
+            <li>
+                <a href="index.php?action=sitemap" class="{% block sitemapNavStyle %}{% endblock %}">Sitemap</a>
+            </li>
+
+
+            <!--next class to be updated once database is in place-->
+            <li><a href="index.php?action=products">	Featured product
+                    <img class="featured" alt="DVD product" src="../images/Withnail_soundtrack_cover_vinyl.jpg" width="140" height="140"></a>
+            </li>
+            <li>
+                <section>
+
+                    {% if(isLoggedIn) %}
+                        <p>you are logged in as: <strong>{{ username }}</strong></p>
+                        <br>
+                        <a href="index.php?action=logout">(logout)</a>
+
+                    {% else %}
+
+                        <a href="index.php?action=login">login</a>
+
+                    {% endif %}
+
+                </section>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+
+
+{% block main %}
+{% endblock %}
+
+
+</body>
+</html>

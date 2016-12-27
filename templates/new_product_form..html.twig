@@ -1,0 +1,52 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}
+New Product Form page
+{% endblock %}
+
+{% block newProductNavStyle %}
+current_page
+{% endblock %}
+
+{% block main %}
+<div>
+
+	<h1>Create a new product</h1>
+	<form
+			action="index.php?action=createNewProduct"
+			method="POST">
+
+<fieldset>
+	<p>
+			<label>Product Description:</label>
+			<input type="text" name="description">
+		</p>
+
+		<p>
+			<label>Price:</label>
+			<input type="text" name="price">
+		</p>
+
+		<p>
+			<label>Stock Level:</label>
+			<input type="text" name="stock">
+		</p>
+
+		<p>
+			<label>Product Category:</label>
+
+		<select name="ProductCategoryId">
+			{% for category in categories %}
+				<option value="{{ category.ProductCategoryId}}">{{ category.CategoryDescription}} </option>
+			{% endfor %}
+
+
+		</select>
+					<input type="submit" value="Create New Product">
+</fieldset>
+	</form>
+
+</div>
+
+
+{% endblock %}

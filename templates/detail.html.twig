@@ -1,0 +1,35 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}
+    detail page
+{% endblock %}
+
+{% block detailLinkStyle %}
+    current_page
+{% endblock %}
+
+{% block main %}
+
+      <dl>
+        <h2>Product Details: {{ products.Description}}</h2>
+        <dt> Catalogue #</dt>
+        <dd> {{ products.Id}}</dd>
+        <dt> Quantity Available</dt>
+        <dd> {{ products.StockLevel}}</dd>
+
+        <dt> Price</dt>
+        <dd> €{{ products.Price}}</dd>
+
+        <dt> Category</dt>
+        <dd> {{ products.CategoryDescription}}</dd>
+        <dt>
+            <img class="highlight" src="{{ products.Image_URL}}">
+        </dt>
+        <dd>
+            <a href="index.php?action=buy&id={{products.ID}}">Buy this Product</a>
+            <a href="index.php?action=showUpdateProductForm&id={{products.Id}}">UpdateProduct</a>
+            <a href="index.php?action=list" class="{% block productsNavStyle %}{% endblock %}">View All Products</a>
+        </dd>
+
+</dl>
+{% endblock %}

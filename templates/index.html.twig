@@ -1,0 +1,38 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}
+	Index page
+{% endblock %}
+
+{% block indexNavStyle %}
+	current_page
+{% endblock %}
+
+{% block main %}
+	<div>
+
+
+		<div class="column_container">
+			<section class="flex">
+				<h4>What is Lorem Ipsum?</h4>
+				<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+			</section>
+		</div>
+		<div class="column_container">
+			<section class="flex">
+
+{% foreach products in product %}
+
+				<tr>
+					<td>{{product.description }}</td>
+					<td>&euro; {{product.price}}</td>
+					<a href="index.php?action=addToCart&id={{product.Id}}">View Product</a>
+				</tr>
+
+{% endforeach %}
+		</section>
+		</div>
+	</div>
+
+
+{% endblock %}

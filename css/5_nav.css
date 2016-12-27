@@ -1,0 +1,130 @@
+
+h2 {
+    padding-left: 30px;
+    color:white;
+    background:steelblue;
+
+}
+#sidenav {
+    background-color: #dddddd;
+    width: 240px;
+    float: left;
+    margin: 10px 0 0 7px;
+    padding-top: 0px;
+    display: inline;
+}
+#sidenav ul {
+    background-color: #dddddd;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: 220px;
+}
+
+#sidenav ul li a {
+    display: block;
+    color: #000000;
+	text-decoration: none;
+    padding: 3px 3px 5px 5px;
+    border-bottom: dotted 1px #999999;
+    background-color: #dddddd;
+}
+
+#sidenav ul li a.current_page {
+	display:block;
+    color: #ffffff !important;
+    background-color: #e91802;
+}
+
+
+#sidenav ul li a.featured img.featured {
+    display:block;
+    padding: 15px 15px 15px 15px;
+}
+#sidenav ul li a.featured  {
+	display:block;
+    padding: 3px 5px 5px 5px;
+	border-bottom: dotted 1px #999999;
+}
+
+#topnav li {
+    flex: 1;
+}
+
+#topnav a {
+    display: block;
+    border: 0.5rem solid lime;
+    padding: 0.2rem;
+    background: aqua;
+    text-align: center;
+    color: black;
+    text-decoration:none;
+}
+
+
+
+#topnav a img {
+    display: block;
+    padding: 1rem;
+    background-color: lightgreen;
+   text-align: center;
+    border: 0.1rem solid black;
+    text-decoration: none;
+    color: blue;
+}
+
+#topnav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+#topnav ul li {
+    padding-left: 1em;
+    border: black;
+}
+
+img.thumbnail {
+
+    height: 80px;
+    width: 80px;
+    padding: 0px 10px 0px 10px;
+}
+
+img.highlight{
+
+    height: 150px;
+    width: 150px;
+    padding: 0px 10px 0px 10px;
+}
+
+
+dl {
+    width: 80%;
+    overflow:hidden;
+    padding: 0;
+    margin: 0
+}
+dt {
+    float: left;
+    width: 40%;
+    background: lightgrey;
+    border-style: solid;
+    border: 1px;
+    padding: 5px;
+    margin: 5px;
+}
+dd {
+    float: left;
+    width: 40%;
+    background: white;
+    align-content: center;
+    border: 1px;
+    border-style: solid;
+    padding: 5px;
+    margin: 5px;
+}
+
+
+

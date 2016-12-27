@@ -1,0 +1,22 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}
+    details page
+{% endblock %}
+
+{% block detailsLinkStyle %}
+    current_page
+{% endblock %}
+
+{% block main %}
+    <h1>
+        Message
+    </h1>
+
+    <p>
+        {{  message  }}
+        <a href="index.php?action=list" class="{% block productsNavStyle %}{% endblock %}">View All Products</a>
+    </p>
+
+    
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}
+    list page
+{% endblock %}
+
+{% block listLinkStyle %}
+    current_page
+{% endblock %}
+
+{% block main %}
+
+<!-- start table for displaying DVD details -->
+
+<table>
+    <h2>Withnail and I Official Merchandise for Sale</h2>
+
+    <tr>
+        <th> ID </th>
+        <th> Description</th>
+        <th> Quantity Available</th>
+        <th> Price</th>
+        <th> Category</th>
+        <th> Detail</th>
+        <th></th>
+    </tr>
+    {% for product in products %}
+
+        <tr>
+            <td> {{ product.Id}}</td>
+            <td> {{ product.Description}}</td>
+            <td> {{ product.StockLevel}}</td>
+            <td> €{{ product.Price}}</td>
+            <td> {{ product.CategoryDescription}}</td>
+
+            <td> <img class="thumbnail" src="{{ product.Image_URL}}"></td>
+            <td>
+                <a href="index.php?action=detail&id={{product.Id}}">View Product</a>
+                </br>
+                <a href="index.php?action=delete&id={{product.Id}}">Remove Product</a>
+                </br>
+                <a href="index.php?action=showUpdateProductForm&id={{product.Id}}">UpdateProduct</a>
+                </br>
+                <a href="index.php?action=addToCart&id={{product.Id}}">(add to cart)</a>
+            </td>
+        </tr>
+
+
+    {% endfor %}
+</table>
+    <form
+            action="index.php"
+            method=”GET"
+    >
+        <input type="hidden" name="action" value="showNewProductForm">
+        <input type="submit" value="Create New Product">
+
+    </form>
+{% endblock %}
