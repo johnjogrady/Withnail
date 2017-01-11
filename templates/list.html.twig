@@ -4,7 +4,7 @@
     list page
 {% endblock %}
 
-{% block listLinkStyle %}
+{% block listNavStyle %}
     current_page
 {% endblock %}
 
@@ -26,6 +26,7 @@
     </tr>
     {% for product in products %}
 
+
         <tr>
             <td> {{ product.Id}}</td>
             <td> {{ product.Description}}</td>
@@ -37,9 +38,13 @@
             <td>
                 <a href="index.php?action=detail&id={{product.Id}}">View Product</a>
                 </br>
+        {% if 'admin' in username %}
                 <a href="index.php?action=delete&id={{product.Id}}">Remove Product</a>
                 </br>
-                <a href="index.php?action=showUpdateProductForm&id={{product.Id}}">UpdateProduct</a>
+            {% endif%}
+        {% if 'admin' in username %}
+            <a href="index.php?action=showUpdateProductForm&id={{product.Id}}">UpdateProduct</a>
+        {% endif%}
                 </br>
                 <a href="index.php?action=addToCart&id={{product.Id}}">(add to cart)</a>
             </td>

@@ -21,6 +21,7 @@ h2 {
     width: 220px;
 }
 
+
 #sidenav ul li a {
     display: block;
     color: #000000;
@@ -39,6 +40,7 @@ h2 {
 
 #sidenav ul li a.featured img.featured {
     display:block;
+    align-items: center;
     padding: 15px 15px 15px 15px;
 }
 #sidenav ul li a.featured  {
@@ -100,6 +102,7 @@ img.highlight{
 }
 
 
+
 dl {
     width: 80%;
     overflow:hidden;
@@ -125,6 +128,5 @@ dd {
     padding: 5px;
     margin: 5px;
 }
-
 
 

@@ -1,5 +1,4 @@
-{% extends '_base.html.twig' %}
-
+{% extends '_base.html.twig'%}
 {% block pageTitle %}
 	Index page
 {% endblock %}
@@ -11,28 +10,73 @@
 {% block main %}
 	<div>
 
-
 		<div class="column_container">
 			<section class="flex">
-				<h4>What is Lorem Ipsum?</h4>
-				<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+				<h2>Welcome to the WithNail and I site!</h2>
+				<p>On this page, you can find out more about this great movie as well as browsing our varied selection of merchandise</p>
 			</section>
-		</div>
+
+
 		<div class="column_container">
+            {% if shoppingcart %}
 			<section class="flex">
+				<h3>shopping cart</h3>
+					<table>
+						<tr>
+							<th>ProductId</th>
+							<th>Item Description</th>
+							<th>Quantity</th>
+                        	<th>Price</th>
+                            <th>Product Preview</th>
 
-{% foreach products in product %}
+                            <th>sub-total</th>
+							<th>(remove item)</th>
+							<th>Buy One More</th>
+							<th>Buy One Less</th>
+						</tr>
 
-				<tr>
-					<td>{{product.description }}</td>
-					<td>&euro; {{product.price}}</td>
-					<a href="index.php?action=addToCart&id={{product.Id}}">View Product</a>
-				</tr>
+{%    set total = 0 %}
 
-{% endforeach %}
+    {% for cartitem in shoppingcart %}
+						<tr>
+							<td>{{cartitem.getProduct().Id }}</td>
+							<td>{{cartitem.getProduct().Description}}</td>
+							<td>{{cartitem.quantity}}</td>
+							<td>&euro;{{cartitem.getProduct().Price}}</td>
+                            <td> <img class="thumbnail" src="{{ cartitem.getProduct().Image_URL}}"></td>
+
+                            <td>&euro;{{cartitem.getProduct().Price * cartitem.quantity}}
+								{%  set total = total +cartitem.getProduct().Price * cartitem.quantity %}
+							<td><a href="index.php?action=removeFromCart&id={{cartitem.getProduct().Id}}">(remove from cart)</a></td>
+							<td><a href="index.php?action=addToCart&id={{cartitem.getProduct().Id}}">(Buy One More!)</a></td>
+                            <td><a href="index.php?action=buyOneLess&id={{cartitem.getProduct().Id}}">(Buy One Less!)</a></td>
+						</tr>
+						{% endfor %}
+
+
+				</table>
+				<div>Order Total &euro; {{ total }}</div>
+
 		</section>
+            {% endif %}
 		</div>
+
 	</div>
 
-
+        <div class="column_container">
+            <section class="flex">
+                <h2>View All Merchandise</h2>
+                <a href="index.php?action=list"><img alt="Vinyl album cover" src="../images/Withnail_soundtrack_cover_vinyl.jpg" width="200" height="200"></a>
+            </section>
+            <section class="flex">
+                <h2>View Music and Video Products</h2>
+                <a href="index.php?action=music"><img alt="DVD" src="../images/Withnail_dvd.jpg" width="200" height="200"></a>
+            </section>
+            <section class="flex">
+                <h2>View Clothing and Apparel Prodyucts</h2>
+                <a href="index.php?action=clothing"><img alt="Coat" src="../images/coat.jpeg" width="200" height="200"></a>
+            </section>
+        </div>
 {% endblock %}
+
+	</div>

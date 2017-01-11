@@ -7,11 +7,16 @@ class MainController
     {
         $template = 'index';
         $argsArray = [];
-        $template = 'loginForm';
-        $shoppingCart = $this->getShoppingCart();
-        $products = Product::getAllProducts();
+        $isLoggedIn = $this->isLoggedInFromSession();
+        $username = $this->usernameFromSession();
 
-        return $twig->render($template . '.html.twig', $argsArray);
+        $shoppingCart = $this->getShoppingCartAction();
+        $products = Product::getAllProducts();
+        $argsArray = [
+            'shoppingcart' => $shoppingCart,
+            'isloggedin'=>$isLoggedIn,
+            'username'=>$username
+        ];
 
         return $twig->render($template . '.html.twig', $argsArray);
     }
@@ -21,9 +26,11 @@ class MainController
     public function aboutAction($twig)
     {
         $template = 'about';
-        $argsArray = [];
         $isLoggedIn = $this->isLoggedInFromSession();
         $username = $this->usernameFromSession();
+        $argsArray = [ 'isloggedin'=>$isLoggedIn,
+            'username'=>$username];
+
 
         return $twig->render($template . '.html.twig', $argsArray);
     }
@@ -34,13 +41,16 @@ class MainController
         $argsArray = [];
         $isLoggedIn = $this->isLoggedInFromSession();
         $username = $this->usernameFromSession();
+        $argsArray = [
+            'isloggedin'=>$isLoggedIn,
+            'username'=>$username
+        ];
 
-        return $twig->render($template . '.html.twig', $argsArray);
-    }
+        return $this->indexAction($twig);
+       }
     function listAction($twig)
     {
-        $pageTitle = 'list of DVD votes';
-        $productsRepository = new ProductsRepository();
+        $pageTitle = 'List';
         $products=Product::getAllProducts();// adapted version of getAll CRUD4FREE Method [used to pull in some joined table data]
         $isLoggedIn = $this->isLoggedInFromSession();
         $username = $this->usernameFromSession();
@@ -48,13 +58,45 @@ class MainController
         $categories = $productsRepository->getCategories();
         $template = 'list';
         $argsArray = [
-            'products' => $products,'categories'=>$categories
+            'products' => $products,'categories'=>$categories,'username'=>$username,'isloggedin'=>$isLoggedIn
+        ];
+
+        return $twig->render($template . '.html.twig', $argsArray);    }
+
+    function clothingAction($twig)
+    {
+        $pageTitle = 'Clothing';
+        $productcategoryid= 2;
+        $products=Product::getFilteredProducts($productcategoryid);// adapted version of getAll CRUD4FREE Method [used to pull in some joined table data]
+        $isLoggedIn = $this->isLoggedInFromSession();
+        $username = $this->usernameFromSession();
+        $productsRepository = new ProductsRepository();
+        $categories = $productsRepository->getCategories();
+        $template = 'clothing';
+        $argsArray = [
+            'products' => $products,'categories'=>$categories,'username'=>$username,'isloggedin'=>$isLoggedIn
+        ];
+
+        return $twig->render($template . '.html.twig', $argsArray);    }
+
+    function musicAction($twig)
+    {
+        $pageTitle = 'music';
+        $productcategoryid= 1;
+        $products=Product::getFilteredProducts($productcategoryid);// adapted version of getAll CRUD4FREE Method [used to pull in some joined table data]
+        $isLoggedIn = $this->isLoggedInFromSession();
+        $username = $this->usernameFromSession();
+        $productsRepository = new ProductsRepository();
+        $categories = $productsRepository->getCategories();
+        $template = 'music';
+        $argsArray = [
+            'products' => $products,'categories'=>$categories,'username'=>$username,'isloggedin'=>$isLoggedIn
         ];
 
         return $twig->render($template . '.html.twig', $argsArray);    }
 
 
-    function detail_action($twig) {
+    function detailAction($twig) {
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
            $productsRepository = new ProductsRepository();
         $product = Product::getOneProductById($id);
@@ -64,19 +106,19 @@ class MainController
            if(null == $product){
             $message = 'sorry, no product with id = ' . $id . ' could be retrieved from the database';
             $template = 'message';
-            $argsArray = [  'message' => $message];
+            $argsArray = [  'message' => $message,'username'=>$username,'isLoggedin'=>$isLoggedIn];
             return $twig->render($template.'.html.twig', $argsArray);
         } else {
             // output the detail of product in HTML table
             $template = 'detail';
             $argsArray = [
-                'products' => $product
+                'products' => $product,'username'=>$username,'isloggedin'=>$isLoggedIn
             ];
-            return $twig->render($template.'.html.twig', $argsArray);
+                return $twig->render($template.'.html.twig', $argsArray);
         }
     }
 
-    function show_new_product_form_action($twig)
+    function showNewProductFormAction($twig)
     {
 
             $pageTitle = 'Add New Product';
@@ -88,12 +130,12 @@ class MainController
 
             $template = 'list';
             $argsArray = [
-                'categories' => $categories
+                'categories' => $categories,'username'=>$username,'isloggedin'=>$isLoggedIn
             ];
         return $twig->render('new_product_form..html.twig', $argsArray);
     }
 
-    function create_product_action($twig)
+    function createProductAction($twig)
     {
         $new_product = new Product();
         $new_product->setDescription(filter_input(INPUT_POST, 'description'));
@@ -113,12 +155,12 @@ class MainController
             $message = 'sorry, there was a problem creating new product';
         }
         $template = 'message';
-        $argsArray = [  'message' => $message];
+        $argsArray = [  'message' => $message,'username'=>$username,'isloggedin'=>$isLoggedIn];
         return $twig->render($template.'.html.twig', $argsArray);
 
     }
 
-    function create_customer_action($twig)
+    function createCustomerAction($twig)
     {
         $isLoggedIn = $this->isLoggedInFromSession();
         $username = $this->usernameFromSession();
@@ -146,7 +188,7 @@ class MainController
             } else {
                 $message = 'Sorry, there was a problem creating adding this new account, please check your connection';
                 $template = 'message';
-                $argsArray = ['message' => $message];
+                $argsArray = ['message' => $message,'username'=>$username];
                 return $twig->render($template . '.html.twig', $argsArray);
             }
         }
@@ -176,7 +218,7 @@ class MainController
         else {return false;}
     }
 
-    function delete_action($twig)
+    function deleteAction($twig)
     {
         $isLoggedIn = $this->isLoggedInFromSession();
         $username = $this->usernameFromSession();
@@ -192,12 +234,12 @@ class MainController
             $message = 'sorry, product id = ' . $id . ' could not be deleted';
         }
         $template = 'message';
-        $argsArray = [  'message' => $message];
+        $argsArray = [  'message' => $message,'username'=>$username,'isloggedin'=>$isLoggedIn];
         return $twig->render($template.'.html.twig', $argsArray);
 
     }
 
-    function show_update_product_form_action($twig)
+    function showUpdateProductFormAction($twig)
     {
         $isLoggedIn = $this->isLoggedInFromSession();
         $username = $this->usernameFromSession();
@@ -213,14 +255,14 @@ class MainController
         if (null == $product) {
             $message = 'sorry, no product with id = ' . $id . ' could be retrieved from the database';
             $template = 'message';
-            $argsArray = ['message' => $message];
+            $argsArray = ['message' => $message,'username'=>$username,'isloggedin'=>$isLoggedIn];
 
             return $twig->render($template . '.html.twig', $argsArray);
         } else {
             // output the detail of product in HTML table
             $template = 'update';
             $argsArray = [
-                'product' => $product,'categories'=>$categories
+                'product' => $product,'categories'=>$categories,'username'=>$username,'isloggedin'=>$isLoggedIn
             ];
 
 
@@ -229,7 +271,7 @@ class MainController
     }
 
 
-    public function update_product_action($twig)
+    public function updateProductAction($twig)
     {
         $productsRepository = new ProductsRepository();
         $connection = $productsRepository->getConnection();
@@ -238,7 +280,7 @@ class MainController
         $product=new Product();
 
         $product->setId(filter_input(INPUT_POST, 'Id', FILTER_SANITIZE_NUMBER_INT));
-        $product->setPrice(filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT)/100);
+        $product->setPrice(filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT));
         $product->setDescription(filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING));
         $product->setImageUrl(filter_input(INPUT_POST, 'image_url', FILTER_SANITIZE_STRING));
         $product->setStocklevel(filter_input(INPUT_POST, 'stock', FILTER_SANITIZE_NUMBER_INT));
@@ -250,65 +292,18 @@ class MainController
             $message = 'sorry, there was a problem updated the product';
         }
         $template = 'message';
-        $argsArray = [  'message' => $message];
+        $argsArray = [  'message' => $message,'username'=>$username,'isloggedin'=>$isLoggedIn];
         return $twig->render($template . '.html.twig', $argsArray);
     }
 
-    public function clothingAction($twig)
+    public function loginAction($twig)
     {
         $isLoggedIn = $this->isLoggedInFromSession();
         $username = $this->usernameFromSession();
-
-        $template = 'clothing';
+        $template = 'login';
         $argsArray = [];
         return $twig->render($template.'.html.twig', $argsArray);
 
-       }
-
-    public function register($twig)
-    {
-        $isLoggedIn = $this->isLoggedInFromSession();
-        $username = $this->usernameFromSession();
-        $template = 'register';
-        $argsArray = [];
-        return $twig->render($template.'.html.twig', $argsArray);
-
-    }
-
-    public function castAction($twig)
-    {
-        $isLoggedIn = $this->isLoggedInFromSession();
-        $username = $this->usernameFromSession();
-        $template = 'cast';
-        $argsArray = [];
-        return $twig->render($template . '.html.twig', $argsArray);
-    }
-
-    public function merchandiseAction($twig)
-    {
-        $isLoggedIn = $this->isLoggedInFromSession();
-        $username = $this->usernameFromSession();
-        $template = 'merchandise';
-        $argsArray = [];
-        return $twig->render($template . '.html.twig', $argsArray);
-    }
-
-    public function postersAction($twig)
-    {
-        $isLoggedIn = $this->isLoggedInFromSession();
-        $username = $this->usernameFromSession();
-        $template = 'posters';
-        $argsArray = [];
-        return $twig->render($template . '.html.twig', $argsArray);
-    }
-
-    public function productsAction($twig)
-    {
-        $isLoggedIn = $this->isLoggedInFromSession();
-        $username = $this->usernameFromSession();
-        $template = 'products';
-        $argsArray = [];
-        return $twig->render($template . '.html.twig', $argsArray);
     }
 
     public function registerAction($twig)
@@ -320,13 +315,15 @@ class MainController
         return $twig->render($template . '.html.twig', $argsArray);
     }
 
-
-    public function scriptAction($twig)
+    public function logoutAction($twig)
     {
-        $isLoggedIn = $this->isLoggedInFromSession();
-        $username = $this->usernameFromSession();
-        $template = 'script';
-        $argsArray = [];
+        $isLoggedIn = false;
+        $username = null;
+        $this->killSession();
+        $template = 'message';
+        $message = 'You are now logged out';
+        $template = 'message';
+        $argsArray = [  'message' => $message];
         return $twig->render($template . '.html.twig', $argsArray);
     }
 
@@ -335,82 +332,154 @@ class MainController
         $isLoggedIn = $this->isLoggedInFromSession();
         $username = $this->usernameFromSession();
         $template = 'sitemap';
-        $argsArray = [];
+        $argsArray = ['username'=>$username,'isloggedin'=>$isLoggedIn];
         return $twig->render($template . '.html.twig', $argsArray);
     }
 
-    public function killSession()
-    {
-        $_SESSION = [];
 
-        if (ini_get('session.use_cookies')){
-            $params = session_get_cookie_params();
-            setcookie(	session_name(),
-                '', time() - 42000,
-                $params['path'], $params['domain'],
-                $params['secure'], $params['httponly']
-            );
-        }
-        session_destroy();
-    }
 
-    public function index_action($twig)
+
+    public function addToCartAction($twig)
     {
+        // get the ID of product to add to cart
         $isLoggedIn = $this->isLoggedInFromSession();
         $username = $this->usernameFromSession();
-        $template = 'loginForm';
-        $argsArray = [];
-        return $twig->render($template . '.html.twig', $argsArray);
-    }
-
-
-    function getShoppingCart()
-    {
-        if (isset($_SESSION['shoppingCart'])){
-            return $_SESSION['shoppingCart'];
-
-        } else {
-            return [];
-        }
-    }
-
-    function addToCart($twig)
-    {
-        // get the ID of product to add to cart
-        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-        $shoppingCart = $this->getShoppingCart();       // get the cart array
-
-        $oldTotal = 0;    				     // default is old total is zero
-
-        // if quantity found in cart array, then use it as oldTotal
-        if(isset($shoppingCart[$id])){
-            $oldTotal = $shoppingCart[$id];
-        }
-
-        $shoppingCart[$id] = $oldTotal + 1;             // store (old total + 1)
-        $_SESSION['shoppingCart'] = $shoppingCart;      // store new  array into SESSION
-
-
-        $template = 'index';
-        $argsArray = [];
-        return $twig->render($template . '.html.twig', $argsArray);
-    }
-
-    function removeFromCart() {
-        // get the ID of product to add to cart
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
         // get the cart array
-        $shoppingCart = getShoppingCart();
+        $shoppingCart = $this->getShoppingCartAction();
+
+        // default is a new cart tiem
+        $cartItem = new CartItem($id);
+
+        // if quantity found in cart array, then use this
+        if(isset($shoppingCart[$id])){
+            $cartItem = $shoppingCart[$id];
+            $oldQuantity = $cartItem->getQuantity();
+
+            // store old quantity + 1 as new quantity into cart array
+            $newQuantity = $oldQuantity + 1;
+            $cartItem->setQuantity($newQuantity);
+        }
+
+        // store item in cart array
+        $shoppingCart[$id] = $cartItem;
+
+        // store new  array into SESSION
+        $_SESSION['shoppingCart'] = $shoppingCart;
+        $argsArray = [
+            'shoppingcart' => $shoppingCart,
+            'isloggedin'=>$isLoggedIn,
+            'username'=>$username
+        ];
+        return $this->indexAction($twig, $argsArray);
+
+    }
+
+
+    public function buyOneLessAction($twig)
+    {
+        // get the ID of product to add to cart
+        $isLoggedIn = $this->isLoggedInFromSession();
+        $username = $this->usernameFromSession();
+        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+        // get the cart array
+        $shoppingCart = $this->getShoppingCartAction();
+
+        // default is a new cart tiem
+        $cartItem = new CartItem($id);
+
+        // if quantity found in cart array, then use this
+        if(isset($shoppingCart[$id])){
+            $cartItem = $shoppingCart[$id];
+            $oldQuantity = $cartItem->getQuantity();
+
+            // store old quantity + 1 as new quantity into cart array
+            $newQuantity = $oldQuantity - 1;
+            $cartItem->setQuantity($newQuantity);
+        }
+
+        // store item in cart array
+        $shoppingCart[$id] = $cartItem;
+
+        // store new  array into SESSION
+        $_SESSION['shoppingCart'] = $shoppingCart;
+        $argsArray = [
+            'shoppingcart' => $shoppingCart,
+            'isloggedin'=>$isLoggedIn,
+            'username'=>$username
+        ];
+        return $this->indexAction($twig, $argsArray);
+
+    }
+
+    public function removeFromCartAction($twig)
+    {
+        // get the ID of product to add to cart
+        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $isLoggedIn = $this->isLoggedInFromSession();
+        $username = $this->usernameFromSession();
+
+        // get the cart array
+        $shoppingCart = $this->getShoppingCartAction();
 
         // remove entry for this ID
         unset($shoppingCart[$id]);
 
         // store new  array into SESSION
         $_SESSION['shoppingCart'] = $shoppingCart;
+        $argsArray = [
+            'shoppingcart' => $shoppingCart,
+            'isloggedin'=>$isLoggedIn,
+            'username'=>$username
+        ];
+        return $this->indexAction($twig, $argsArray);
+    }
 
-        // redirect display page
+    function getShoppingCartAction()
+    {
+        if (isset($_SESSION['shoppingCart'])){
+            return $_SESSION['shoppingCart'];
+        } else {
+            return [];
+        }
+    }
+
+    function forgetSessionAction()
+    {
+        killSessionAction();
+
+        // redirect to display text
         indexAction();
+    }
+
+    /**
+     * advice on how to kill session from PHP.net
+     * URL: http://php.net/manual/en/function.session-destroy.php
+     */
+    function killSessionAction()
+    {
+        // (1) Unset all of the session variables.
+        $_SESSION = [];
+
+        // (2) If it is desired to kill the session, also delete the session cookie.
+        // Note: This will destroy the session, and not just the session data!
+        if (ini_get('session.use_cookies')){
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params['path'],
+                $params['domain'],
+                $params['secure'],
+                $params['httponly']
+            );
+        }
+
+        // (3) destroy the session.
+        session_destroy();
     }
 
 
@@ -434,10 +503,14 @@ class MainController
         }
 
         $template = 'loginSuccess';
-        $argsArray = [];
+
         if ($isLoggedIn) {
             // success - found a matching username and password, store in session
             $_SESSION['user'] = $username;
+            $argsArray = [
+                'isloggedin'=>$isLoggedIn,
+                'username'=>$username];
+
             return $twig->render($template . '.html.twig', $argsArray);
 
         } else {

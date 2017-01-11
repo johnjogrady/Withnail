@@ -1,8 +1,9 @@
 <?php
-session_start();
+
 
 
 require_once __DIR__ . '/../app/setup.php';
+session_start();
 
 use Itb\MainController;
 $mainController = new MainController;
@@ -15,90 +16,81 @@ switch($action){
         $html = $mainController->aboutAction($twig);
         break;
 
-
-    case 'clothing':
-        $html = $mainController->clothingAction($twig);
-
         break;
     case 'list':
         $html = $mainController->listAction($twig);
         break;
 
-    case 'detail':
-        $html = $mainController->detail_action($twig);
-
+    case 'clothing':
+        $html = $mainController->clothingAction($twig);
         break;
 
-    case 'show':
-        show_one_product_action(1);
+    case 'music':
+        $html = $mainController->musicAction($twig);
+        break;
+
+    case 'detail':
+        $html = $mainController->detailAction($twig);
+
         break;
 
     case 'delete':
-        $html = $mainController->delete_action($twig);
+        $html = $mainController->deleteAction($twig);
         break;
 
     case 'showNewProductForm':
-        $html = $mainController->show_new_product_form_action($twig);
+        $html = $mainController->showNewProductFormAction($twig);
         break;
 
     case 'createNewProduct':
-        $html = $mainController->create_product_action($twig);
+        $html = $mainController->createProductAction($twig);
         break;
 
     case 'createNewCustomer':
-        $html = $mainController->create_customer_action($twig);
+        $html = $mainController->createCustomerAction($twig);
         break;
 
-    case 'cast':
-        $html = $mainController->castAction($twig);
+    case 'login':
+        $html = $mainController->loginAction($twig);
         break;
 
-    case 'merchandise':
-        $html= $mainController->merchandiseAction($twig);
-        break;
-
-    case 'posters':
-        $html=$mainController->postersAction($twig);
-        break;
-
-    case 'products':
-        $html=$mainController->productsAction($twig);
+    case 'logout':
+        $html = $mainController->logoutAction($twig);
         break;
 
     case 'sitemap':
-        $html=$mainController->sitemapAction($twig);
-        break;
-
-    case 'script':
-        $html=$mainController->scriptAction($twig);
+        $html=$mainController->siteMapAction($twig);
         break;
 
     case 'register':
         $html=$mainController->registerAction($twig);
         break;
     case 'showUpdateProductForm':
-        $html=$mainController->show_update_product_form_action($twig);
+        $html=$mainController->showUpdateProductFormAction($twig);
         break;
 
-    case 'updateproduct':
-        $html = $mainController->update_product_action($twig);
+    case 'updateProduct':
+        $html = $mainController->updateProductAction($twig);
         break;
     case 'processLogin':
         $html = $mainController->processLoginAction($twig);
         break;
 
     case 'addToCart':
-        $html=$mainController->addToCart($twig);
+        $html=$mainController->addToCartAction($twig);
+        break;
+
+    case 'buyOneLess':
+        $html=$mainController->buyOneLessAction($twig);
         break;
 
     case 'removeFromCart':
-        removeFromCart();
+        $html=$mainController->removeFromCartAction($twig);
         break;
 
     case 'emptyCart':
         forgetSession();
         break;
-
 
     default:
         $html=$mainController->indexAction($twig);

@@ -1,4 +1,0 @@
-<?php
-$indexLinkClass = '';
-$aboutLinkClass = '';
-$listLinkClass = '';
