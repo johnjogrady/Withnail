@@ -10,11 +10,17 @@
           <root url="phar://$MODULE_DIR$/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.0.phar/" />
           <root url="phar://$MODULE_DIR$/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
           <root url="phar://$MODULE_DIR$/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/phpDocumentor.phar/" />
+          <root url="phar://$MODULE_DIR$/phpunit.phar/" />
+          <root url="phar://$MODULE_DIR$/apigen.phar/" />
         </CLASSES>
         <SOURCES>
           <root url="phar://$MODULE_DIR$/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.0.phar/" />
           <root url="phar://$MODULE_DIR$/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
           <root url="phar://$MODULE_DIR$/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/phpDocumentor.phar/" />
+          <root url="phar://$MODULE_DIR$/phpunit.phar/" />
+          <root url="phar://$MODULE_DIR$/apigen.phar/" />
         </SOURCES>
       </library>
     </orderEntry>

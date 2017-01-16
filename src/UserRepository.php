@@ -1,12 +1,29 @@
 <?php
-
+/**
+ * Class Category | core/UserRepository.php
+ *
+ * @version     v.1.0 (06/01/2016)
+ * @Author John O'Grady
+ *
+ */
 namespace Itb;
 
+/**
+ * User repository for User class to write and read from database
+ * No longer actively in use
+ * Retained for now [in case it breaks something at the last minute!]
+ */
 
 class UserRepository
 {
+    /**
+     * Empty array of users
+     */
     private $users = [];
 
+    /**
+     * Constructor for users used by Matt to seed database initially
+     */
     public function __construct() {
         $matt = new User();
         $matt->setId(1);
@@ -24,6 +41,11 @@ class UserRepository
         $this->users[1] = $matt;
         $this->users[2] = $admin;
     }
+
+    /**
+     * retrieve all users in the database
+     * returns an array of user objects
+     */
     public function getAll() {
         return $this->users;
     }
@@ -34,6 +56,11 @@ class UserRepository
             return null;
         }
     }
+
+    /**
+     * retrieve a single user passing in usernanme
+     * returns a single user object
+     */
     public function getOneByUsername($username) {
         foreach ($this->users as $user){
             if($user->getUsername() == $username){
@@ -42,6 +69,10 @@ class UserRepository
         }
         return null; 		// if we get this far, then we didn’t find a matching record
     }
+
+    /**
+     * Helper method to check if user provided a valid username and password which can be matched to the database
+     */
     public static function canFindMatchingUsernameAndPassword($username, $password)
     {
         $user = User::getOneByUsername($username);

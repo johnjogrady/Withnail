@@ -1,8 +1,18 @@
 <?php
 
-
-
+// autoloader
+// ------------
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../app/setup.php';
+// my settings
+// ------------
+$myTemplatesPath = __DIR__ . '/../templates';
+
+// setup twig
+// ------------
+$loader = new Twig_Loader_Filesystem($myTemplatesPath);
+$twig = new Twig_Environment($loader);
+
 session_start();
 
 use Itb\MainController;
@@ -50,6 +60,22 @@ switch($action){
         $html = $mainController->createCustomerAction($twig);
         break;
 
+    case 'processEditUser':
+        $html = $mainController->processEditUserAction($twig);
+        break;
+
+    case 'showEditUserForm':
+        $html = $mainController->showEditUserAction($twig);
+        break;
+
+    case 'showPasswordForm':
+        $html = $mainController->showPasswordFormAction($twig);
+        break;
+
+    case 'changePassword':
+        $html = $mainController->changePasswordAction($twig);
+        break;
+
     case 'login':
         $html = $mainController->loginAction($twig);
         break;
@@ -89,7 +115,47 @@ switch($action){
         break;
 
     case 'emptyCart':
-        forgetSession();
+        $html=$mainController->forgetSessionAction($twig);
+        break;
+
+    case 'saveShoppingCart':
+        $html=$mainController->saveShoppingCartAction($twig);
+        break;
+
+    case 'purchaseBasket':
+        $html=$mainController->purchaseBasketAction($twig);
+        break;
+    case 'confirmPurchase':
+        $html=$mainController->confirmPurchaseAction($twig);
+        break;
+
+    case 'colorGray':
+        $html = $mainController->changeColor($twig, 'gray');
+        break;
+
+    case 'colorGreen':
+        $html = $mainController->changeColor($twig, 'green');
+        break;
+    case 'colorBlue':
+        $html = $mainController->changeColor($twig, 'blue');
+        break;
+    case 'colorNone':
+        $html = $mainController->changeColor($twig, 'none');
+        break;
+    case 'sizeOne':
+        $html =  $mainController->changeSize($twig, 1);
+        break;
+
+    case 'sizeOnePointTwo':
+        $html =  $mainController->changeSize($twig, 1.2);
+        break;
+
+    case 'userAdmin':
+        $html=$mainController->userAdminAction($twig);
+        break;
+
+    case 'showEditUserById':
+        $html=$mainController->showEditUserByIdAction($twig);
         break;
 
     default:

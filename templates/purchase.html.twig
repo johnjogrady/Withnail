@@ -9,18 +9,13 @@
 
 {% block main %}
 	<div>
-
-		<div class="column_container">
-			<section class="flex">
-				<h2>Welcome to the WithNail and I site!</h2>
-				<p>On this page, you can find out more about this great movie as well as browsing our varied selection of merchandise</p>
-			</section>
-
+		<h2>Purchase Confirmation Page</h2>
+		<p>Please review your order then click confirm purchase below to place your order.</p>
 
 		<div class="column_container">
             {% if shoppingcart %}
 			<section class="flex">
-				<h3>shopping cart</h3>
+				<h3>Please Confirm Your order</h3>
 					<table>
 						<tr>
 							<th>ProductId</th>
@@ -30,9 +25,6 @@
                             <th>Product Preview</th>
 
                             <th>sub-total</th>
-							<th>(remove item)</th>
-							<th>Buy One More</th>
-							<th>Buy One Less</th>
 						</tr>
 
 {%    set total = 0 %}
@@ -47,22 +39,24 @@
 
                             <td>&euro;{{cartitem.getProduct().Price * cartitem.quantity}}
 								{%  set total = total +cartitem.getProduct().Price * cartitem.quantity %}
-							<td><a href="index.php?action=removeFromCart&id={{cartitem.getProduct().Id}}">(remove from cart)</a></td>
-							<td><a href="index.php?action=addToCart&id={{cartitem.getProduct().Id}}">(Buy One More!)</a></td>
-                            <td><a href="index.php?action=buyOneLess&id={{cartitem.getProduct().Id}}">(Buy One Less!)</a></td>
-						</tr>
+							</tr>
 						{% endfor %}
 
 			</section>
 				</table>
 					<div class="column_container">
 						<section class="flex">
-						<a href="index.php?action=saveShoppingCart">Store shopping cart for later</a>
+						Your Order Total is &euro; {{ total }}
 						</section>
 						<section class="flex">
-							Order Total &euro; {{ total }}
-							<br>
-							<td><a href="index.php?action=purchaseBasket">Place order for Cart contents</a></td>
+							<a href="index.php?action=confirmPurchase">(Place Order)</a>
+						</section>
+
+						<section class="flex">
+							<a href="index.php?action=index">(Cancel)</a>
+						</section>
+						<section class="flex">
+							<a href="index.php?action=saveShoppingCart">Store shopping cart for later</a>
 						</section>
 						<section class="flex">
 							<a href="index.php?action=emptyCart">Empty cart</a>

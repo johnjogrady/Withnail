@@ -1157,7 +1157,7 @@ class Twig_Environment
     }
 
     /**
-     * Gets the registered Tests.
+     * Gets the registered tests.
      *
      * @return Twig_TestInterface[]
      *

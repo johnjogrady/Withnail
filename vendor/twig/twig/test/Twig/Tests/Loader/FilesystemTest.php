@@ -98,28 +98,28 @@ class Twig_Tests_Loader_FilesystemTest extends PHPUnit_Framework_TestCase
         return array(
             array(
                 dirname(__FILE__).'/Fixtures',
-                'test/Twig/Tests/Loader/Fixtures/named_quater/named_absolute.html',
+                'test/Twig/tests/Loader/Fixtures/named_quater/named_absolute.html',
                 null,
             ),
             array(
                 dirname(__FILE__).'/Fixtures/../Fixtures',
-                'test/Twig/Tests/Loader/Fixtures/named_quater/named_absolute.html',
+                'test/Twig/tests/Loader/Fixtures/named_quater/named_absolute.html',
                 null,
             ),
             array(
-                'test/Twig/Tests/Loader/Fixtures',
-                'test/Twig/Tests/Loader/Fixtures/named_quater/named_absolute.html',
+                'test/Twig/tests/Loader/Fixtures',
+                'test/Twig/tests/Loader/Fixtures/named_quater/named_absolute.html',
                 getcwd(),
             ),
             array(
                 'Fixtures',
                 'Fixtures/named_quater/named_absolute.html',
-                getcwd().'/test/Twig/Tests/Loader',
+                getcwd().'/test/Twig/tests/Loader',
             ),
             array(
                 'Fixtures',
                 'Fixtures/named_quater/named_absolute.html',
-                getcwd().'/test/../test/Twig/Tests/Loader',
+                getcwd().'/test/../test/Twig/tests/Loader',
             ),
         );
     }

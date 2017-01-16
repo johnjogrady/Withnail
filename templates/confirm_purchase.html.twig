@@ -1,0 +1,29 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}
+    details page
+{% endblock %}
+
+{% block detailsLinkStyle %}
+    current_page
+{% endblock %}
+
+{% block main %}
+    <h1>
+        Thanks for your order {{ username }}
+    </h1>
+
+    <p>
+        We appreciate your business.
+        </p>
+    <br>
+    <p>
+        If you have any queries please don't hesitate to contact us
+    </p>
+        <a href="index.php?action=index">Return to Home Page</a>
+    </p>
+    </p>
+    <a href="index.php?action=detail">Shop for more products</a>
+    </p>
+    
+{% endblock %}

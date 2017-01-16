@@ -1,0 +1,77 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}
+    Edit User page
+{% endblock %}
+
+{% block indexNavStyle %}
+    current_page
+{% endblock %}
+
+
+
+
+{% block main %}
+
+
+    <div class="column_container">
+        <form 		action="index.php?action=processEditUser"
+                     method="POST">
+            <fieldset>
+                <section class="contact info">
+                    <legend>Please review and update your details below</legend>
+                    <input type="hidden" name="Id" value="{{user.Id}}">
+                    <input type="hidden" name="password" value="{{user.password}}">
+                    <label>First Name:</label>
+                    <input type="text" name="firstName" value="{{user.firstName}}">
+                    <label>Last Name:</label>
+                    <input type="text" name="lastName" value="{{user.lastName}}">
+                    <label>Address Line 1:</label>
+                    <input type="text" name="addressLine1" value="{{user.customerAddress1}}">
+                    <label>Address Line 2:</label>
+                    <input type="text" name="addressLine2" value="{{user.customerAddress2}}">
+                    <label>Address Line 3:</label>
+                    <input type="text" name="addressLine3" value="{{user.customerAddress3}}">
+                    <label>County:</label>
+                    <input type="text" name="county" value="{{user.county}}">
+                    <label>Mobile Number:</label>
+                    <input type="text" name="mobileNumber" value="{{user.mobileNumber}}">
+                    <label>Email:</label>
+                    <input type="text" name="email" value="{{user.email}}">
+
+                <input type="submit">
+                </p>
+                </section>
+            </fieldset>
+        </form>
+            <nav>
+            <div id="sidenav2">
+                <ul>
+                    <li>
+                        <strong>Choose an avatar for your profile</strong>
+                    </li>
+                    <li>
+                        <img class="block" height="70" width="60" src="../images/cat.jpg" alt="cat">
+                        <input class="block" type="radio" name="avatar" value="cat" checked="true">
+
+                    </li>
+                    <li>
+                        <img class="block" height="70" width="60"  src="../images/dog.jpg" alt="dog">
+                        <input type="radio" name="avatar" value="dog">
+                    </li>
+                    <li>
+                        <img class="block" height="70" width="60" src="../images/pig.jpg" alt="pig">
+                        <input type="radio" name="avatar" value="pig">
+                    </li>
+                    <li>
+                        <img class="block" height="70" width="60" name="avatar" src="../images/rabbit.jpg" alt="rabbit">
+                        <input type="radio" name="avatar" value="rabbit">
+                    </li>
+                </ul>
+            </div>
+            </nav>
+
+    </div>
+
+
+{% endblock %}

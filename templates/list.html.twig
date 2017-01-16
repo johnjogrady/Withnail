@@ -11,7 +11,16 @@
 {% block main %}
 
 <!-- start table for displaying DVD details -->
+    {% if 'admin' in username %}
+<!-- to do- revisit to wire to role admin constant otherwise users who register as admin email will get admin rights!-->
+        <form
+            action="index.php"
+            method=”GET">
+        <input type="hidden" name="action" value="showNewProductForm">
+        <input type="submit" value="Create New Product">
 
+    </form>
+    {% endif%}
 <table>
     <h2>Withnail and I Official Merchandise for Sale</h2>
 
@@ -53,12 +62,5 @@
 
     {% endfor %}
 </table>
-    <form
-            action="index.php"
-            method=”GET"
-    >
-        <input type="hidden" name="action" value="showNewProductForm">
-        <input type="submit" value="Create New Product">
 
-    </form>
 {% endblock %}

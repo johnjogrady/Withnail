@@ -6,7 +6,6 @@ h2 {
 
 }
 #sidenav {
-    background-color: #dddddd;
     width: 240px;
     float: left;
     margin: 10px 0 0 7px;
@@ -22,14 +21,25 @@ h2 {
 }
 
 
-#sidenav ul li a {
+#sidenav ul li a  {
     display: block;
-    color: #000000;
-	text-decoration: none;
+   text-decoration: none;
     padding: 3px 3px 5px 5px;
     border-bottom: dotted 1px #999999;
     background-color: #dddddd;
 }
+
+img.block {
+    display: block;
+}
+
+#sidenav2 ul li  {
+    display: block;
+    text-decoration: none;
+    background-color: whitesmoke;
+    padding: 3px 3px 5px 5px;
+    border-bottom: dotted 1px #999999;
+    }
 
 #sidenav ul li a.current_page {
 	display:block;
@@ -55,11 +65,11 @@ h2 {
 
 #topnav a {
     display: block;
-    border: 0.5rem solid lime;
+    border: 0.5rem solid gainsboro;
     padding: 0.2rem;
-    background: aqua;
+    background: lightgrey;
     text-align: center;
-    color: black;
+    color: #a2a9b1;
     text-decoration:none;
 }
 

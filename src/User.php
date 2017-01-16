@@ -1,27 +1,35 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: john.ogrady
- * Date: 20/12/2016
- * Time: 20:28
+ * Class Category | core/User.php
+ *
+ * @version     v.1.0 (06/01/2016)
+ * @Author John O'Grady
+ *
  */
-
 namespace Itb;
 
 use Mattsmithdev\PdoCrud\DatabaseTable;
 use Mattsmithdev\PdoCrud\DatabaseManager;
-
+/**
+ * User object represents a customer of the website
+ */
 class User extends DatabaseTable
 
 
 {
-
+    /**
+     * Database User roles- not yet actively in use!
+     */
     const ROLE_USER = 1;
     const ROLE_ADMIN = 2;
 
+    /**
+     * Integer ID which represents user in database, auto incremented
+     */
     private $Id;
 
     /**
+     * get id for user
      * @return mixed
      */
     public function getId()
@@ -30,6 +38,7 @@ class User extends DatabaseTable
     }
 
     /**
+     * set id for user
      * @param mixed $Id
      */
     public function setId($Id)
@@ -37,10 +46,14 @@ class User extends DatabaseTable
         $this->Id = $Id;
     }
 
-
+    /**
+     * String representing Username for user
+     *
+     */
     private $username;
 
     /**
+     * get username for User
      * @return mixed
      */
     public function getUsername()
@@ -49,6 +62,7 @@ class User extends DatabaseTable
     }
 
     /**
+     * set username for USer
      * @param mixed $username
      */
     public function setUsername($username)
@@ -56,10 +70,13 @@ class User extends DatabaseTable
         $this->username = $username;
     }
 
-
+    /**
+     * Int representing role references role constants noted above- not yet in active use
+     */
     private $role;
 
     /**
+     * get role attribute for user
      * @return mixed
      */
     public function getRole()
@@ -68,6 +85,7 @@ class User extends DatabaseTable
     }
 
     /**
+     * set role attribute for user
      * @param mixed $role
      */
     public function setRole($role)
@@ -75,10 +93,13 @@ class User extends DatabaseTable
         $this->role = $role;
     }
 
-
+    /**
+     * String representing firstname of user
+     */
     private $firstName;
 
     /**
+     * get firstname of user
      * @return mixed
      */
     public function getFirstName()
@@ -87,15 +108,22 @@ class User extends DatabaseTable
     }
 
     /**
+     * set firstname of user
      * @param mixed $firstName
      */
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
     }
+
+    /**
+     * String representing last name of user
+     * @param String
+     */
     private $lastName ;
 
     /**
+     * get last name
      * @return mixed
      */
     public function getLastName()
@@ -104,15 +132,22 @@ class User extends DatabaseTable
     }
 
     /**
+     * set lastname
      * @param mixed $lastName
      */
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
     }
+
+    /**
+     * Strings representing address of user
+     * @param String
+     */
     private $customerAddress1;
 
     /**
+     * get address
      * @return mixed
      */
     public function getCustomerAddress1()
@@ -130,6 +165,7 @@ class User extends DatabaseTable
     private $customerAddress2;
 
     /**
+     * get address
      * @return mixed
      */
     public function getCustomerAddress2()
@@ -147,6 +183,7 @@ class User extends DatabaseTable
     private $customerAddress3;
 
     /**
+     * get address
      * @return mixed
      */
     public function getCustomerAddress3()
@@ -161,9 +198,14 @@ class User extends DatabaseTable
     {
         $this->customerAddress3 = $customerAddress3;
     }
+
+    /**
+     * String representing County in which user resides
+     */
     private $county;
 
     /**
+     * get county
      * @return mixed
      */
     public function getCounty()
@@ -172,15 +214,22 @@ class User extends DatabaseTable
     }
 
     /**
+     * set county
      * @param mixed $county
      */
     public function setCounty($county)
     {
         $this->county = $county;
     }
+
+    /**
+     * String representing email for user
+     * @param String
+     */
     private $email;
 
     /**
+     * get email
      * @return mixed
      */
     public function getEmail()
@@ -189,15 +238,22 @@ class User extends DatabaseTable
     }
 
     /**
+     * set email
      * @param mixed $email
      */
     public function setEmail($email)
     {
         $this->email = $email;
     }
+
+    /**
+     * String representing mobile number for user
+     * @param String
+     */
     private $mobileNumber ;
 
     /**
+     * get mobile
      * @return mixed
      */
     public function getMobileNumber()
@@ -206,15 +262,22 @@ class User extends DatabaseTable
     }
 
     /**
+     * set mobile
      * @param mixed $mobileNumber
      */
     public function setMobileNumber($mobileNumber)
     {
         $this->mobileNumber = $mobileNumber;
     }
+
+    /**
+     * String representing password for user
+     * Stored as hashed in the database
+     */
     private $password;
 
     /**
+     * password for user
      * @return mixed
      */
     public function getPassword()
@@ -232,45 +295,31 @@ class User extends DatabaseTable
         $this->password = $hashedPassword;
     }
 
-
-    private $numOrders;
-
     /**
+     * chosen avatar for user
      * @return mixed
      */
-    public function getNumOrders()
-    {
-        return $this->numOrders;
-    }
+    private $avatar;
 
     /**
-     * @param mixed $numOrders
-     */
-    public function setNumOrders($numOrders)
-    {
-        $this->numOrders = $numOrders;
-    }
-    private $spendToDate;
-
-    /**
+     * get avatar
      * @return mixed
      */
-    public function getSpendToDate()
+    public function getAvatar()
     {
-        return $this->spendToDate;
+        return $this->avatar;
     }
 
     /**
-     * @param mixed $spendToDate
+     * set avatar
+     * @param mixed $avatar
      */
-    public function setSpendToDate($spendToDate)
+    public function setAvatar($avatar)
     {
-        $this->spendToDate = $spendToDate;
+        $this->avatar = $avatar;
     }
-
     /**
-     * hash the password before storing ...
-     * @param mixed $password
+     * chosen avatar for user- text string
      */
 
     public static function getOneByUsername($username) {
@@ -280,11 +329,12 @@ class User extends DatabaseTable
         $sql = 'SELECT * FROM users WHERE username=:username';
         $statement = $connection->prepare($sql);
         $statement->bindParam(':username', $username, \PDO::PARAM_STR);
-        $statement->setFetchMode(\PDO::FETCH_CLASS, __CLASS__);
+        $statement->setFetchMode(\PDO::FETCH_CLASS,'\\Itb\\User');
         $statement->execute();
 
         if ($object = $statement->fetch()) {
             return $object;
+            var_dump($object);
         } else {
             return null;
         }

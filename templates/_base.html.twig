@@ -10,6 +10,8 @@
         @import "../css/4_layout.css";
         @import "../css/5_nav.css";
         @import "../css/6_aside.css";
+        {{ cssStyleRule }}
+
     </style>
 </head>
 <body>
@@ -32,10 +34,6 @@
                 <li>
                     <img src="../images/footsteps.jpg" alt="Withnail and I">
                 </li>
-<li>
-
-
-</li>
             </ul>
 
       </nav>
@@ -56,7 +54,7 @@
 
             <li>
             <li>
-                <a href="index.php?action=list" class="{% block listNavStyle %}{% endblock %}">View Merchandise</a>
+                <a href="index.php?action=list" class="{% block listNavStyle %}{% endblock %}">View/Update Merchandise</a>
             </li>
             <li>
             <a href="index.php?action=music" class="{% block musicNavStyle %}{% endblock %}">Music Products</a>
@@ -80,18 +78,30 @@
                     {% if(isloggedin) %}
                         <p>you are logged in as: <strong>{{ username }}</strong></p>
                         <br>
-                        <a href="index.php?action=logout">(logout)</a>
+                        <a href="index.php?action=logout">(Logout)</a>
+                        <p>
+                            <a href="index.php?action=showPasswordForm">Change password </a>.
+                        </p>
+                        <p>
+                            <a href="index.php?action=showEditUserForm">Update details</a>.
+                        </p>
 
                     {% else %}
+                    <li>
 
-                        <a href="index.php?action=login">login</a>
+                        <a href="index.php?action=login">Login</a>
+                    </li>
+                    <li>
+                        <a href="index.php?action=register" class="{% block registerNavStyle %}{% endblock %}">Register as New User</a>
+                    </li>
 
                     {% endif %}
-
+            {% if('admin' in username)%}
+                    <li>
+                    <a href="index.php?action=userAdmin">User Administration</a>
+                    </li>
+            {% endif %}
                 </section>
-            </li>
-            <li>
-                <a href="index.php?action=register" class="{% block registerNavStyle %}{% endblock %}">Register as New User</a>
             </li>
 
 
@@ -107,4 +117,37 @@
 
 
 </body>
+<footer>
+    <hr>
+    <div id="topnav">
+        <nav>
+            <ul>
+                <li>
+                    <a>Choose colours=></a>
+                </li>
+                <li>
+                    <a href="index.php?action=colorGray">Grey</a>
+                </li>
+
+                <li>
+                    <a href="index.php?action=colorGreen">Green</a>
+                </li>
+                <li>
+                    <a href="index.php?action=colorBlue">LightBlue</a>
+                </li>
+                <li>
+                    <a href="index.php?action=colorNone">No Colour</a>
+                </li>
+                <li>
+                    <a href="index.php?action=sizeOne">Small Font</a>
+                </li>
+
+                <li>
+                    <a href="index.php?action=sizeOnePointTwo">Large Font</a>
+                </li>
+
+            </ul>
+                </nav>
+    </div>
+</footer>
 </html>
