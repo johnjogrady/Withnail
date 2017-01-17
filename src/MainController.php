@@ -917,11 +917,12 @@ class MainController
         // iterate through the cart items and insert new entries in the database representing quantity, productid and user
         foreach ($shoppingCart as $item) {
             //check id for product and store in memory
-            $productid = $item->getProduct()->Id;
+            $product = $item->getProduct();
+            $productId=$product->getId();
             //check id for quantity and store in memory
             $quantity = $item->getQuantity();
             // prepare sql statement to write into database
-            $sql = 'INSERT into savedcarts (productid, userid, quantity) values ( ' . $productid . ',' . $userid . ',' . $quantity.')';
+            $sql = 'INSERT into savedcarts (productid, userid, quantity) values ( ' . $productId . ',' . $userid . ',' . $quantity.')';
             // attempt to update this line of detail from the cart into the cartitems database table
             Product::databaseUpdate($sql);
         }

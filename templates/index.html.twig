@@ -42,7 +42,7 @@
 							<td>{{cartitem.getProduct().Description}}</td>
 							<td>{{cartitem.quantity}}</td>
 							<td>&euro;{{cartitem.getProduct().Price}}</td>
-                            <td> <img class="thumbnail" src="{{ cartitem.getProduct().Image_URL}}"></td>
+                            <td> <img class="thumbnail" src="{{ cartitem.getProduct().image_url}}"></td>
 
                             <td>&euro;{{cartitem.getProduct().Price * cartitem.quantity}}
 								{%  set total = total +cartitem.getProduct().Price * cartitem.quantity %}
