@@ -4,6 +4,7 @@ use Itb\Product;
 use Mattsmithdev\PdoCrud\DatabaseManager;
 use Mattsmithdev\PdoCrud\DatabaseTable;
 use Mattsmithdev\PdoCrud\DatatbaseUtility;
+use PHPUnit_Framework_Assert as Assert;
 // define DB constants
 // ------------
 define('DB_HOST', 'localhost');
@@ -14,7 +15,7 @@ define('DB_PASS', 'smith');
 class UpdateProductTest extends PHPUnit_Framework_TestCase
 
 {
-
+    // establish database connection using connection credentials defined in constants above
     public function getConnection()
     {
         $host = DB_HOST;
@@ -28,34 +29,18 @@ class UpdateProductTest extends PHPUnit_Framework_TestCase
         return $connection;
     }
 
-    public function testupdateProduct($productId, $newDescription, $expectedResult)
-    {
-        // Arrange
-        $product = Product::getOneProductById($productId);
-        $product->getDescription();
-
-        //Act
-        $result = $product->setDescription($newDescription);
-        $expectedResult='new description';
-        // Assert
-        $this->assertEquals($result, $expectedResult);
-
-    }
-    public function updateProductTester()
-    {
-        return array(
-            array(1, 'new description','new description'));
-    }
+// this test tests creating a product in memory with id which mirrors the attributes of the same product instance
+// in the database and checks that the two objects are the same
 
     public function testGetOneByIdExists()
     {
         // arrange
         $expected = new Product();
-        $expected->setId(1);
+        $expected->setId('1');
         $expected->setDescription('Soundtrack (Vinyl)');
-        $expected->setPrice(9);
-        $expected->setStocklevel(25);
-        $expected->setProductCategoryId(1);
+        $expected->setPrice('9');
+        $expected->setStocklevel('25');
+        $expected->setProductCategoryId('1');
         $expected->setImageUrl('../images/Withnail_soundtrack_cover_vinyl.jpg');
 
         // act
@@ -65,18 +50,61 @@ class UpdateProductTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testNumRowsFromSeedData()
+    // this test tests adding a single product then comparing against an XML file containing
+    // the status of the test Product table prior to the insert
+    // TO DO resolve object {product) to array type mismatch which is causing this test to fail
+    public function testaddProductCheckExists()
     {
         // arrange
-        $numRowsAtStart = 6;
-        $expectedResult = $numRowsAtStart;
+        $product = new Product();
+        $product->setId('999');
+        $product->setDescription('X');
+        $product->setPrice('10');
+        $product->setStocklevel('25');
+        $product->setProductCategoryId('1');
+        $product->setImageUrl('../images/Withnail_soundtrack_cover_vinyl.jpg');
+        // create variable containing expected dataset (from XML)
+        $dataFilePath = __DIR__ . '/databaseXml/expectedProductsWithX.xml';
+        $expectedTable = $this->createXMLDataSet($dataFilePath)
+            ->getTable('products');
 
         // act
+        // add item to table in our test DB
+        Product::insert($product);
+
+        // retrieve dataset from our test DB
+        //
+        $productsInDatabaseAfterInsert = (array)Product::getAll();
+
 
         // assert
-        $this->assertEquals($expectedResult, $this->getConnection()->getRowCount('products'));
+        Assert::assertEquals($expectedTable, $productsInDatabaseAfterInsert);
+
+    }
+    // TO DO resolve type mismatch OBject:
+
+// this test tests that calling the getOneById result with the id of a product instance which does not exist returns NULL
+    public function testGetOneByIdNoProductExistsForGivenId()
+    {
+        // arrange
+
+        // act
+        $result = Product::getOneById(9999);
+
+        // assert
+        $this->assertNull($result);
     }
 
+    // utility functions
+    protected function createXMLDataSet($xmlFile){
+
+        return new PHPUnit_Extensions_Database_DataSet_XmlDataSet($xmlFile);
+    }
+
+    protected function createDefaultDBConnection(PDO $connection, $schema = '')
+    {
+        return new PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection($connection, $schema);
+    }
 
 
 }

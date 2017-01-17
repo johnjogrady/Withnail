@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="products">
+        <column>id</column>
+        <column>description</column>
+        <column>price</column>
+        <column>stocklevel</column>
+        <column>restockQuantity</column>
+        <column>image_url</column>
+        <column>productCategoryId</column>
+
+
+        <row name="products">
+            <value name="id">1</value>
+            <value name="description">Soundtrack (Vinyl)</value>
+            <value name="price">9</value>
+            <value name="stocklevel">25</value>
+            <value name="image_url">../images/Withnail_soundtrack_cover_vinyl.jpg</value>
+            <value name="productCategoryId">1</value>
+        </row>
+
+        <row name="products">
+            <value name="id">5</value>
+            <value name="description">Soundtrack (CD)</value>
+            <value name="price">9</value>
+            <value name="stocklevel">5</value>
+            <value name="image_url">../images/Withnail_soundtrack_cover_cd.jpg</value>
+            <value name="productCategoryId">1</value>
+        </row>
+
+        <row name="products">
+        <value name="id">17</value>
+        <value name="description">DVD</value>
+        <value name="price">17</value>
+        <value name="stocklevel">6</value>
+        <value name="image_url">../images/Withnail_dvd.jpg</value>
+        <value name="productCategoryId">1</value>
+    </row>
+        <row name="products">
+        <value name="id">27</value>
+        <value name="description">Tshirt</value>
+        <value name="price">22</value>
+        <value name="stocklevel">5</value>
+        <value name="image_url">../images/tshirt.jpg</value>
+        <value name="productCategoryId">2</value>
+    </row>
+        <row name="products">
+            <value name="id">29</value>
+            <value name="description">Withnail replica coat</value>
+            <value name="price">300</value>
+            <value name="stocklevel">5</value>
+            <value name="image_url">../images/coat.jpg</value>
+            <value name="productCategoryId">2</value>
+        </row>
+    </table>
+</dataset>

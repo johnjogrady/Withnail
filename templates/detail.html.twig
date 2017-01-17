@@ -28,7 +28,7 @@
             <dd>
                 <a href="index.php?action=addToCart&id={{products.Id}}">Add Product To Cart</a>
        {% if 'admin' in username %}
-            <a href="index.php?action=showNewProductForm&id={{products.Id}}">UpdateProduct</a>
+            <a href="index.php?action=showUpdateProductForm&id={{products.Id}}">UpdateProduct</a>
         {% endif %}
             <a href="index.php?action=list" class="{% block productsNavStyle %}{% endblock %}">View All Products</a>
         </dd>
