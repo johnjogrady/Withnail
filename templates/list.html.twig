@@ -11,8 +11,13 @@
 {% block main %}
 
 <!-- start table for displaying DVD details -->
-    {% if 'admin' in username %}
-<!-- to do- revisit to wire to role admin constant because as things stand now, users who register as admin email will get admin rights!-->
+    {% if('admin@withnail.com' in username)%}
+    <!-- to do- revisit to wire to role admin constant but for now only the user with 'admin@withnail.com' as their
+    email will get admin rights!
+    this check shows the user admin page in the left nav in the base html twig template and also the add new product
+    feature on this html twig template. A weakness of this is that a user who is not in the role can currently
+    navigate to this page if they know the URL...
+    -->
         <form
             action="index.php"
             method=”GET">
@@ -42,8 +47,7 @@
             <td> {{ product.StockLevel}}</td>
             <td> €{{ product.Price}}</td>
             <td> {{ product.CategoryDescription}}</td>
-
-            <td> <img class="thumbnail" src="{{ product.Image_URL}}"></td>
+            <td> <img class="thumbnail" src="{{product.image_url}}"></td>
             <td>
                 <a href="index.php?action=detail&id={{product.Id}}">View Product</a>
                 </br>

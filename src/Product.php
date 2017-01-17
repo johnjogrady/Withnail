@@ -126,7 +126,7 @@ class Product extends DatabaseTable
      * string storing image file location
      * @return mixed
      */
-    private $image_url;
+    private $image_URL;
 
     /**
      * get image file location
@@ -143,7 +143,7 @@ class Product extends DatabaseTable
      */
     public function setImageUrl($image_url)
     {
-        $this->image_url = $image_url;
+        $this->image_url= $image_url;
     }
     /**
      * stock level for product
